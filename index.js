@@ -51,6 +51,7 @@ app.put("/parkings/:id", (req, res) => {
   res.status(200).json(parking);
 });
 
+
 // DELETE
 app.delete("/parkings/:id", (req, res) => {
   const id = parseInt(req.params.id);
@@ -70,7 +71,7 @@ app.get("/reservations", (request, response) => {
 
   
     const reservations = reservations.find((reservation) => reservation.parkingId === id).filter((e) => {
-        
+
     })
 
 
