@@ -1,4 +1,64 @@
 const express = require("express");
+const { Sequelize } = require("sequelize");
+
+// ---------------------------------------- INITIALISATION DE LA BDD ----------------------------------- //
+
+// const sequelize = new Sequelize(
+//   "", // BDD name
+//   "root", // USER name
+//   "", // MP
+//   { dialect: "mysql", host: "localhost" }
+// );
+
+// try {
+//   sequelize.authenticate();
+//   console.log("Connecté à la base de données MySQL!");
+
+//   sequelize.query("CREATE DATABASE `mabdd`;").then(([results, metadata]) => {
+//     console.log("Base de données créée !");
+//   });
+
+// } catch (error) {
+//   console.error("Impossible de se connecter, erreur suivante :", error);
+// }
+
+// ---------------------------------------- INSERT INTO BDD -------------------------------------------- //
+
+// const User = sequelize.define("User", {
+//   firstName: {
+//     type: Sequelize.STRING,
+//   },
+//   isActive: {
+//     type: Sequelize.BOOLEAN,
+//     defaultValue: false,
+//   },
+// });
+
+// await User.sync({force: true});
+
+// ---------------------------------------- SELECT INTO BDD -------------------------------------------- //
+
+// const sequelize = new Sequelize("mabdd", "root", "", {
+//   dialect: "mysql",
+//   host: "localhost",
+// });
+
+// try {
+//   sequelize.authenticate();
+//   console.log("Connecté à la base de données MySQL!");
+
+//   sequelize
+//     .query(
+//       "SELECT eleves.id as 'eleve_id', eleves.nom as 'eleve_nom', eleves.cours_id, cours.nom as 'cours_nom', cours.date as 'cours_date' FROM eleves JOIN cours on eleves.cours_id = cours.id"
+//     )
+//     .then(([results, metadata]) => {
+//       console.log(results);
+//     });
+// } catch (error) {
+//   console.error("Impossible de se connecter, erreur suivante :", error);
+// }
+
+// ----------------------------------------------------------------------------------------------------- //
 
 // La constante app est l’instanciation d’un objet Express, qui va contenir notre serveur ainsi que les méthodes dont nous aurons besoin.
 const app = express();
@@ -74,14 +134,14 @@ app.get("/parkings/:id/reservations", (request, response) => {
 });
 
 // GETONEWITH
-app.get("/parkings/:id/reservations/:id", (request, response) => {
+app.get("/reservations/:id", (request, response) => {
   const id = parseInt(request.params.id);
 
-  const resasParkingX = reservations.filter(
-    (reservation) => reservation.parkingId === id
-  );
+  const resa = reservations.find((reservation) => reservation.id === id);
 
-  response.status(200).json(resasParkingX);
+  const displayParking = parseInt(resa.parkingId);
+
+  response.status(200).json(displayParking);
 });
 
 // ----------------------------------------------------------------------------------------------------- //
