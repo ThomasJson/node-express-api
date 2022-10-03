@@ -8,6 +8,8 @@ const reservations = require("./reservations.json");
 
 app.use(express.json());
 
+// ----------------------------------------------------------------------------------------------------- //
+
 // La méthode .get d’express permet de définir une route GET. Elle prend en premier paramètre une String qui a défini la route à écouter et une callback,
 // qui est la fonction à exécuter si cette route est appelée.
 
@@ -51,7 +53,6 @@ app.put("/parkings/:id", (req, res) => {
   res.status(200).json(parking);
 });
 
-
 // DELETE
 app.delete("/parkings/:id", (req, res) => {
   const id = parseInt(req.params.id);
@@ -61,21 +62,30 @@ app.delete("/parkings/:id", (req, res) => {
   res.status(200).json(parkings);
 });
 
+// GETALLWITH
+app.get("/parkings/:id/reservations", (request, response) => {
+  const id = parseInt(request.params.id);
+
+  const resasParkingX = reservations.filter(
+    (reservation) => reservation.parkingId === id
+  );
+
+  response.status(200).json(resasParkingX);
+});
+
+// GETONEWITH
+app.get("/parkings/:id/reservations/:id", (request, response) => {
+  const id = parseInt(request.params.id);
+
+  const resasParkingX = reservations.filter(
+    (reservation) => reservation.parkingId === id
+  );
+
+  response.status(200).json(resasParkingX);
+});
+
+// ----------------------------------------------------------------------------------------------------- //
+
 app.listen(8080, () => {
   console.log("Serveur is listening .. ");
 });
-
-// GETALLWITH
-app.get("/reservations", (request, response) => {
-    const id = parseInt(request.params.id);
-
-  
-    const reservations = reservations.find((reservation) => reservation.parkingId === id).filter((e) => {
-
-    })
-
-
-    // rechercher dans les parkings pour trouver celui qui a l’id correspondant à celui passé dans l’URL
-  
-    response.status(200).json(reservations);
-  });
