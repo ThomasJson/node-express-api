@@ -61,6 +61,7 @@ const { Sequelize } = require("sequelize");
 // ----------------------------------------------------------------------------------------------------- //
 
 // La constante app est l’instanciation d’un objet Express, qui va contenir notre serveur ainsi que les méthodes dont nous aurons besoin.
+
 const app = express();
 
 const parkings = require("./parkings.json");
