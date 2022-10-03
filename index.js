@@ -74,15 +74,17 @@ app.get("/parkings/:id/reservations", (request, response) => {
 });
 
 // GETONEWITH
-app.get("/parkings/:id/reservations/:id", (request, response) => {
+app.get("/reservations/:id", (request, response) => {
   const id = parseInt(request.params.id);
 
-  const resasParkingX = reservations.filter(
-    (reservation) => reservation.parkingId === id
-  );
+  const resa = reservations.find((reservation) => reservation.id === id);
 
-  response.status(200).json(resasParkingX);
+  const displayParking = parseInt(resa.parkingId);
+  
+  response.status(200).json(displayParking);
 });
+
+
 
 // ----------------------------------------------------------------------------------------------------- //
 
