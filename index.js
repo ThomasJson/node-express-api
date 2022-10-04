@@ -3,13 +3,6 @@ const { Sequelize } = require("sequelize");
 
 // ---------------------------------------- INITIALISATION DE LA BDD ----------------------------------- //
 
-// const sequelize = new Sequelize(
-//   "", // BDD name
-//   "root", // USER name
-//   "", // MP
-//   { dialect: "mysql", host: "localhost" }
-// );
-
 // try {
 //   sequelize.authenticate();
 //   console.log("Connecté à la base de données MySQL!");
@@ -22,19 +15,49 @@ const { Sequelize } = require("sequelize");
 //   console.error("Impossible de se connecter, erreur suivante :", error);
 // }
 
-// ---------------------------------------- INSERT INTO BDD -------------------------------------------- //
+// ---------------------------------------- CONNECT TO BDD --------------------------------------------- //
 
-// const User = sequelize.define("User", {
-//   firstName: {
+const sequelize = new Sequelize(
+  "mabdd", // BDD name
+  "root", // USER name
+  "", // MP
+  { dialect: "mysql", host: "localhost" }
+);
+
+// ------------------------------------- INSERT TABLES/ROWS INTO BDD ----------------------------------- //
+
+// const Classes = sequelize.define("classes", {
+//   name: {
 //     type: Sequelize.STRING,
-//   },
-//   isActive: {
-//     type: Sequelize.BOOLEAN,
-//     defaultValue: false,
 //   },
 // });
 
-// await User.sync({force: true});
+// Classes.sync();
+
+// Classes.bulkCreate([
+//   {name: "Histoire"},
+//   {name: "Français"},
+//   {name: "Maths"},
+//   {name: "Sports"}
+// ]).then(() => console.log("Classes data have been saved"));
+
+// const Students = sequelize.define("eleves", {
+//   firstName: {
+//     type: Sequelize.STRING,
+//   },
+// });
+
+// Students.belongsTo(Classes);
+
+// Students.bulkCreate([
+//   {firstName: "Tom", classId: 1},
+//   {firstName: "Valentin", classId: 1},
+//   {firstName: "Bryan", classId: 4},
+//   {firstName: "Victor", classId: 3},
+//   {firstName: "Zoé", classId: 2}
+// ]).then(() => console.log("Students data have been saved"));
+
+// Students.sync();
 
 // ---------------------------------------- SELECT INTO BDD -------------------------------------------- //
 
